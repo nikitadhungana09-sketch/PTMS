@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
@@ -86,20 +85,22 @@ class TicketController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'priority' => 'required|in:Low,Medium,High,Critical',
         ]);
-
+    
         $ticket = Ticket::create([
             'title' => $request->title,
             'description' => $request->description,
+            'priority' => $request->priority,
             'status' => 'open',
             'created_by' => Auth::id(),
         ]);
-
+    
         activityLog(
             'Ticket Created',
-            'Created ticket: ' . $ticket->title
+            'Created ' . $ticket->priority . ' priority ticket: ' . $ticket->title
         );
-
+    
         return redirect()
             ->route('tickets.index')
             ->with('success', 'Ticket created successfully.');

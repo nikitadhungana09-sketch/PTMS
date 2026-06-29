@@ -120,6 +120,7 @@
 
             <th class="text-left p-4">Ticket</th>
 
+            <th class="text-left p-4">Priority</th>
             <th class="text-left p-4">Status</th>
 
             <th class="text-left p-4">Created By</th>
@@ -154,29 +155,61 @@
 
             </td>
 
+            <!-- Priority -->
             <td class="p-4">
 
-                @if($ticket->status == 'open')
+            @if($ticket->priority == 'Low')
 
-                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
-                        🟢 Open
-                    </span>
+            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+            🟢 Low
+            </span>
 
-                @elseif($ticket->status == 'pending')
+            @elseif($ticket->priority == 'Medium')
 
-                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">
-                        🟡 Pending
-                    </span>
+            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">
+            🟡 Medium
+            </span>
 
-                @else
+            @elseif($ticket->priority == 'High')
 
-                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
-                        🔴 Closed
-                    </span>
+            <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">
+            🟠 High
+            </span>
 
-                @endif
+            @else
 
-            </td>
+        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium">
+            🔴 Critical
+        </span>
+
+    @endif
+
+</td>
+
+<!-- Status -->
+<td class="p-4">
+
+    @if($ticket->status == 'open')
+
+        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+            🟢 Open
+        </span>
+
+    @elseif($ticket->status == 'pending')
+
+        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm">
+            🟡 Pending
+        </span>
+
+    @else
+
+        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
+            🔴 Closed
+        </span>
+
+    @endif
+
+</td>
 
             <td class="p-4">
 
@@ -243,8 +276,7 @@
 
         <tr>
 
-            <td colspan="6" class="text-center py-10 text-gray-500">
-
+            <td colspan="7" class="text-center py-10 text-gray-500">
                 📭 No tickets found.
 
             </td>
